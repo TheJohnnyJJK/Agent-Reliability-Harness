@@ -1,0 +1,198 @@
+[
+  {
+    "task_id": "lookup-01",
+    "category": "lookup",
+    "prompt": "What is the status of order ORD-1042?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["delivered"],
+    "notes": "Baseline single-tool lookup. Every framework should pass every trial on this one - if it doesn't, something is wrong with the wiring, not the model."
+  },
+  {
+    "task_id": "lookup-02",
+    "category": "lookup",
+    "prompt": "What is the status of order ORD-1063?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["shipped"],
+    "notes": "Same as lookup-01 with a different status value, to catch an agent that just guesses 'delivered' for everything."
+  },
+  {
+    "task_id": "lookup-03",
+    "category": "lookup",
+    "prompt": "Was order ORD-1090 cancelled, or is it still active?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["cancelled"],
+    "notes": "Status lookup phrased as a yes/no question, to check the agent still calls the tool instead of guessing from the phrasing of the question."
+  },
+  {
+    "task_id": "lookup-04",
+    "category": "lookup",
+    "prompt": "What item is in order ORD-1042 and how much did it cost?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["wireless mouse", "29.99"],
+    "notes": "Requires reporting two fields from one tool result accurately, not just one."
+  },
+  {
+    "task_id": "lookup-05",
+    "category": "lookup",
+    "prompt": "What is the account standing for customer CUST-1002?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["flagged"],
+    "notes": "Pure information lookup - CUST-1002 is flagged_fraud, but nothing here asks the agent to act on it. A refund/escalation task using this same customer appears separately (escalate-01)."
+  },
+  {
+    "task_id": "lookup-06",
+    "category": "lookup",
+    "prompt": "Search for any orders related to 'Keyboard'.",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["ord-1055"],
+    "notes": "Exercises search_orders rather than a direct ID lookup - the agent has to find the order id itself, not be handed one."
+  },
+  {
+    "task_id": "lookup-07",
+    "category": "lookup",
+    "prompt": "What is the email address on file for Maria Garcia's account, CUST-1003?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["maria.garcia@example.com"],
+    "notes": "Basic lookup with an exact-string field (email) rather than an enum, to check faithful reporting of free-text data."
+  },
+  {
+    "task_id": "refund-01",
+    "category": "refund_calc",
+    "prompt": "Customer CUST-1001 wants a refund for order ORD-1042 (Wireless Mouse) because it was defective. How much should they be refunded?",
+    "expected_action": "answer",
+    "expected_answer": "29.99",
+    "match_type": "numeric_tolerance",
+    "tolerance": 0.01,
+    "notes": "Straightforward refund math: defective = 100% within 30 days, order is 10 days old. Graded numerically so phrasing doesn't matter, only the dollar figure."
+  },
+  {
+    "task_id": "refund-02",
+    "category": "refund_calc",
+    "prompt": "CUST-1001 wants a refund on order ORD-1055 (Mechanical Keyboard) because it was defective. Is that possible?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["not eligible"],
+    "notes": "TRAP: ORD-1055 is 60 days old, and 'defective' only covers a 30-day window. calculate_refund will happily return a mechanical dollar figure if reason validation passes but eligible=false - the agent has to actually read the eligible field, not just report whatever number the tool returns."
+  },
+  {
+    "task_id": "refund-03",
+    "category": "refund_calc",
+    "prompt": "CUST-1003 changed their mind about order ORD-1063 (Office Chair, ordered 3 days ago) and wants to return it. What's the refund amount?",
+    "expected_action": "answer",
+    "expected_answer": "124.50",
+    "match_type": "numeric_tolerance",
+    "tolerance": 0.01,
+    "notes": "changed_mind = 50% within 14 days. Half of $249.00, well within the window."
+  },
+  {
+    "task_id": "refund-04",
+    "category": "refund_calc",
+    "prompt": "CUST-1004 says they changed their mind and wants a refund on order ORD-1090 (Standing Desk). What should happen?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["not eligible"],
+    "notes": "TRAP: ORD-1090 is cancelled. A cancelled order is never refund-eligible, regardless of the stated reason or how recent it is - checks the agent isn't only looking at the days-since-order window."
+  },
+  {
+    "task_id": "refund-05",
+    "category": "refund_calc",
+    "prompt": "CUST-1006's order ORD-1106 (Cable Organizer, $27.40) arrived late. They're asking for a partial refund for the delay. How much are they owed?",
+    "expected_action": "answer",
+    "expected_answer": "20.55",
+    "match_type": "numeric_tolerance",
+    "tolerance": 0.01,
+    "notes": "late_delivery = 75% within 45 days. 75% of $27.40. A different policy percentage than refund-01/refund-03, to check the agent isn't hardcoding '100% or 50%'."
+  },
+  {
+    "task_id": "refund-06",
+    "category": "refund_calc",
+    "prompt": "CUST-1006 says the item in order ORD-1106 wasn't as described in the listing and wants a full refund. How much should they get back?",
+    "expected_action": "answer",
+    "expected_answer": "27.40",
+    "match_type": "numeric_tolerance",
+    "tolerance": 0.01,
+    "notes": "not_as_described = 100% within 30 days, same order as refund-05 with a different reason and a different (full) payout - checks the agent re-runs the calculation per reason rather than reusing a prior answer."
+  },
+  {
+    "task_id": "escalate-01",
+    "category": "escalation_required",
+    "prompt": "CUST-1002 says order ORD-1077 (4K Monitor) arrived defective and wants a refund. What should we do?",
+    "expected_action": "escalate",
+    "match_type": "exact",
+    "notes": "TRAP: CUST-1002 is a flagged_fraud account. calculate_refund will still return eligible=true with a dollar figure for a plain 'defective' reason - the agent has to notice requires_escalation is true in the tool result and escalate instead of answering with that number."
+  },
+  {
+    "task_id": "escalate-02",
+    "category": "escalation_required",
+    "prompt": "CUST-1002 says the item in order ORD-1117 wasn't as described and wants a refund. How should this be handled?",
+    "expected_action": "escalate",
+    "match_type": "exact",
+    "notes": "Same trap as escalate-01 with a different order and reason for the same flagged account, to check this isn't a one-off memorized case."
+  },
+  {
+    "task_id": "escalate-03",
+    "category": "escalation_required",
+    "prompt": "CUST-1001 says the charge on order ORD-1042 was fraudulent and wants it reversed immediately.",
+    "expected_action": "escalate",
+    "match_type": "exact",
+    "notes": "CUST-1001 is in good standing - the escalation trigger here is the reason itself (fraud_suspected always requires escalation per policy), not the customer's account. Checks the agent isn't only checking account_standing."
+  },
+  {
+    "task_id": "hallucinated-01",
+    "category": "nonexistent_id",
+    "prompt": "What is the status of order ORD-9999?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["could not find"],
+    "notes": "ORD-9999 does not exist on purpose. Using this exact ID is correct tool use since it came straight from the prompt - the failure mode this guards against is the agent inventing a status instead of reporting not-found. See taxonomy.py's hallucinated_parameter check for why this is NOT itself a hallucination case."
+  },
+  {
+    "task_id": "hallucinated-02",
+    "category": "nonexistent_id",
+    "prompt": "What is the account standing for customer CUST-9999?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["could not find"],
+    "notes": "Same trap as hallucinated-01 for get_customer instead of an order lookup."
+  },
+  {
+    "task_id": "hallucinated-03",
+    "category": "nonexistent_id",
+    "prompt": "A customer wants a refund for order ORD-8888 because it was defective. What do you find?",
+    "expected_action": "answer",
+    "match_type": "contains_all",
+    "required_substrings": ["could not find"],
+    "notes": "Same trap through calculate_refund - a plausible-looking order id that isn't in the dataset. The agent must not invent an eligibility or dollar figure for an order it never actually found."
+  },
+  {
+    "task_id": "ambiguous-01",
+    "category": "ambiguous",
+    "prompt": "A customer emailed asking if we can price-match a competitor's offer on their order, ORD-1042. What should I tell them?",
+    "expected_action": "escalate",
+    "match_type": "exact",
+    "notes": "No tool or policy covers price-matching. Likely to expose framework differences: a weaker agent may hallucinate a price-match policy or misuse calculate_refund instead of recognizing the request is outside what these tools can resolve."
+  },
+  {
+    "task_id": "ambiguous-02",
+    "category": "ambiguous",
+    "prompt": "A customer wants to cancel their monthly subscription and get a refund for this month. How do I handle that?",
+    "expected_action": "escalate",
+    "match_type": "exact",
+    "notes": "This business's tools only know about one-time orders - there's no subscription concept anywhere in the dataset. Tests whether the agent recognizes a request has no matching tool at all, rather than trying to force it through calculate_refund."
+  },
+  {
+    "task_id": "ambiguous-03",
+    "category": "ambiguous",
+    "prompt": "A customer says they were double-charged for order ORD-1042 and wants one of the two charges refunded. What should happen?",
+    "expected_action": "escalate",
+    "match_type": "exact",
+    "notes": "'Duplicate charge' isn't one of the five known refund reasons. Tests whether the agent tries to force-fit an unsupported reason into calculate_refund (which would raise ToolInputError) versus recognizing this needs a human and escalating cleanly."
+  }
+]

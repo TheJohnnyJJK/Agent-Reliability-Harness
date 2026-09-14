@@ -1,0 +1,8 @@
+pydantic>=2.7
+anthropic>=0.120
+python-dotenv>=1.0
+pytest>=8.0
+langgraph>=0.2
+langchain-anthropic>=0.3
+crewai[anthropic]>=1.15
+ag2>=1.0
