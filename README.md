@@ -1,5 +1,11 @@
 # Agent Reliability Harness
 
+## In plain terms
+
+We built a fake customer-support AI agent — the kind that answers "where's my order" or "can I get a refund." Then we built it three separate times, using three different toolkits for wiring AI agents together (LangGraph, CrewAI, AG2). Same brain (Claude) answering, same fake customer database, same 22 test questions. The only thing that changes between the three versions is which toolkit built them.
+
+Why build it three times instead of once? Because "the AI agent works" usually just means someone tried it once and got a good answer, and that's not proof of anything — it might have gotten lucky. So instead: every one of the 22 questions gets asked 5 times per toolkit, a script (not a person, not another AI) checks each answer against a known-correct one, and when an answer is wrong, another script figures out *how* it went wrong — did it loop, choke on an error, invent an order number that doesn't exist, or just confidently answer wrong. The result is a report that says, honestly, which toolkit actually held up under repetition and which one only looked good the first time.
+
 Project #02 from the [Proof of Work](https://claude.ai/code/artifact/02b489c1-763f-4138-bbd0-020e7d0a544e) portfolio, a companion to project #01, [Lead Router](https://github.com/TheJohnnyJJK/Lead-Router). The idea here: prove an agent actually works with numbers and trials, not a demo GIF.
 
 This one builds the same small support-ops agent three times, once each in **LangGraph**, **CrewAI**, and **AG2** (the actively maintained AutoGen fork). Same tools, same dataset, same model, same 22 hand-written test tasks. The only thing that changes between the three is the orchestration framework, so any difference in the results is actually about the framework, not about which model answered the question.
