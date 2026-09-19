@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-labelledby="p4t">
+  <title id="p4t">A checklist checking an answer against a known-correct one</title>
+  <defs>
+    <radialGradient id="g4" cx="50%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#2A3260" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#12162A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="640" height="200" rx="20" fill="#12162A"/>
+  <rect width="640" height="200" rx="20" fill="url(#g4)"/>
+  <g transform="translate(180,50)">
+    <rect width="120" height="100" rx="10" fill="#F5EFE0"/>
+    <text x="60" y="40" font-size="12" text-anchor="middle" font-family="JetBrains Mono, monospace" fill="#8C93B8">answer</text>
+    <text x="60" y="66" font-size="14" text-anchor="middle" font-family="Karla, sans-serif" fill="#232A52">"$42.50"</text>
+  </g>
+  <text x="330" y="112" font-size="30" text-anchor="middle">=</text>
+  <g transform="translate(360,50)">
+    <rect width="120" height="100" rx="10" fill="#1F3B3C" stroke="#5FD9BE" stroke-width="2"/>
+    <text x="60" y="40" font-size="12" text-anchor="middle" font-family="JetBrains Mono, monospace" fill="#8FD9C4">expected</text>
+    <text x="60" y="66" font-size="14" text-anchor="middle" font-family="Karla, sans-serif" fill="#F5EFE0">"$42.50"</text>
+  </g>
+  <circle cx="550" cy="60" r="18" fill="#5FD9BE"/>
+  <path d="M542 60l5 5 10-10" stroke="#0E2A28" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

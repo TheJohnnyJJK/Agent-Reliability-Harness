@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-labelledby="p3t">
+  <title id="p3t">The same question asked five times in a row, shown as five repeated question marks</title>
+  <rect width="640" height="200" rx="20" fill="#12162A"/>
+  <text x="320" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#B9C0DE" text-anchor="middle">Every question, five times, no shortcuts</text>
+  <g transform="translate(0,90)">
+    <g transform="translate(110,0)"><circle r="26" fill="#232A52" stroke="#3A4276" stroke-width="2"/><text y="9" font-size="24" text-anchor="middle" fill="#FFC15E" font-family="Georgia, serif">?</text></g>
+    <g transform="translate(210,0)"><circle r="26" fill="#232A52" stroke="#3A4276" stroke-width="2"/><text y="9" font-size="24" text-anchor="middle" fill="#FFC15E" font-family="Georgia, serif">?</text></g>
+    <g transform="translate(310,0)"><circle r="26" fill="#232A52" stroke="#3A4276" stroke-width="2"/><text y="9" font-size="24" text-anchor="middle" fill="#FFC15E" font-family="Georgia, serif">?</text></g>
+    <g transform="translate(410,0)"><circle r="26" fill="#232A52" stroke="#3A4276" stroke-width="2"/><text y="9" font-size="24" text-anchor="middle" fill="#FFC15E" font-family="Georgia, serif">?</text></g>
+    <g transform="translate(510,0)"><circle r="26" fill="#232A52" stroke="#3A4276" stroke-width="2"/><text y="9" font-size="24" text-anchor="middle" fill="#FFC15E" font-family="Georgia, serif">?</text></g>
+  </g>
+</svg>

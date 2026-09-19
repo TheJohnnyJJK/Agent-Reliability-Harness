@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-labelledby="p5t">
+  <title id="p5t">Four failure cards: went in circles, choked on an error, made something up, confidently wrong</title>
+  <rect width="640" height="200" rx="20" fill="#12162A"/>
+  <text x="320" y="30" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#B9C0DE" text-anchor="middle">When someone trips, Judge writes down exactly how</text>
+
+  <g transform="translate(20,50)">
+    <rect width="140" height="118" rx="14" fill="#1B2140" stroke="#3A3276" stroke-width="2"/>
+    <text x="70" y="52" font-size="28" text-anchor="middle">🔁</text>
+    <text x="70" y="86" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">Went in</text>
+    <text x="70" y="102" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">circles</text>
+  </g>
+  <g transform="translate(174,50)">
+    <rect width="140" height="118" rx="14" fill="#1B2140" stroke="#3A3276" stroke-width="2"/>
+    <text x="70" y="52" font-size="28" text-anchor="middle">💥</text>
+    <text x="70" y="86" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">Choked on</text>
+    <text x="70" y="102" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">an error</text>
+  </g>
+  <g transform="translate(328,50)">
+    <rect width="140" height="118" rx="14" fill="#1B2140" stroke="#3A3276" stroke-width="2"/>
+    <text x="70" y="52" font-size="28" text-anchor="middle">🎭</text>
+    <text x="70" y="86" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">Made</text>
+    <text x="70" y="102" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">something up</text>
+  </g>
+  <g transform="translate(482,50)">
+    <rect width="140" height="118" rx="14" fill="#1B2140" stroke="#3A3276" stroke-width="2"/>
+    <text x="70" y="52" font-size="28" text-anchor="middle">😬</text>
+    <text x="70" y="86" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">Confidently</text>
+    <text x="70" y="102" font-family="Karla, sans-serif" font-size="12.5" fill="#F5EFE0" text-anchor="middle">wrong</text>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" width="640" height="200" role="img" aria-labelledby="p6t">
+  <title id="p6t">Two outcomes: worked once, versus worked every time</title>
+  <rect width="640" height="200" rx="20" fill="#12162A"/>
+  <text x="320" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="16" fill="#B9C0DE" text-anchor="middle">Two numbers come out - the second one matters more</text>
+
+  <g transform="translate(90,58)">
+    <rect width="200" height="118" rx="16" fill="#4A2A33"/>
+    <rect x="42" y="16" width="116" height="26" rx="13" fill="#FF6B5B"/>
+    <text x="100" y="34" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#2B1210" text-anchor="middle">WORKED ONCE</text>
+    <text x="16" y="70" font-family="Karla, sans-serif" font-size="13" fill="#F5EFE0">Right one time.</text>
+    <text x="16" y="88" font-family="Karla, sans-serif" font-size="13" fill="#F5EFE0">Could be luck.</text>
+  </g>
+
+  <g transform="translate(350,58)">
+    <rect width="200" height="118" rx="16" fill="#1F3B3C"/>
+    <rect x="14" y="16" width="172" height="26" rx="13" fill="#5FD9BE"/>
+    <text x="100" y="34" font-family="JetBrains Mono, monospace" font-size="11.5" font-weight="700" fill="#0E2A28" text-anchor="middle">WORKED EVERY TIME</text>
+    <text x="16" y="70" font-family="Karla, sans-serif" font-size="13" fill="#F5EFE0">All 5 tries right.</text>
+    <text x="16" y="88" font-family="Karla, sans-serif" font-size="13" fill="#F5EFE0">Worth trusting.</text>
+  </g>
+</svg>

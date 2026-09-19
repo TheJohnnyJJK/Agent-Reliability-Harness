@@ -1,6 +1,72 @@
 # Agent Reliability Harness
 
-## In plain terms
+## The story
+
+### 1. Meet Judge, the fair referee.
+
+![Judge, a fair referee robot holding a clipboard, with a stopwatch above its head](docs/panel-1-judge.svg)
+
+"One good answer doesn't prove anything to me - it might have just
+gotten lucky. I need to see it happen again. And again."
+
+### 2. Three racers, same question.
+
+![Three racer robots labeled LangGraph, CrewAI, and AG2, standing at a starting line](docs/panel-2-racers.svg)
+
+Same customer questions, same tools, same rulebook. Only the racer
+running the course is different - so whatever wins actually earned it.
+
+### 3. Every question, five times, no shortcuts.
+
+![The same question asked five times in a row](docs/panel-3-fivetimes.svg)
+
+Judge asks all 22 questions to every racer - and doesn't stop after one
+good answer. Each question gets tried 5 separate times before Judge
+believes it.
+
+### 4. A script checks the answer - not a feeling.
+
+![A checklist checking an answer against a known-correct one](docs/panel-4-script.svg)
+
+Every answer gets checked against a known-correct one, written down in
+advance - an exact match, a number within tolerance, or a required
+phrase.
+
+### 5. When someone trips, Judge writes down exactly how.
+
+![Four failure cards: went in circles, choked on an error, made something up, confidently wrong](docs/panel-5-failures.svg)
+
+Those are different bugs with different fixes, so lumping them into one
+"fail" count would hide that.
+
+### 6. Two numbers come out - and the second one matters more.
+
+![Two outcomes: worked once, versus worked every time](docs/panel-6-numbers.svg)
+
+It got a right answer one time - that could be luck. Or all five tries
+were right - that's the one worth trusting.
+
+That's the whole idea. There's also an
+[illustrated, interactive version of this story](https://claude.ai/code/artifact/a4d9cee7-58f6-4d1a-bf23-f5d99216eada)
+if you'd rather click through it than scroll. Everything below is how it
+actually works.
+
+<details>
+<summary><strong>Peek at the grown-up version</strong> - what each part of the story actually is in the code</summary>
+
+| In the story | In the code |
+|---|---|
+| Judge | The harness itself - runs, grades, and classifies, never an LLM sitting in judgment |
+| Three racers | The same support-ops agent, built three separate times in LangGraph, CrewAI, and AG2 |
+| Same question, same tools | One shared dataset and tool set (`search_orders`, `get_customer`, `calculate_refund`, `answer`, `escalate`) across all three frameworks |
+| 22 questions, five times each | `tasks/golden_tasks.json`, run via the harness runner - 5 trials per task per framework |
+| A script checks the answer | `harness/grading.py` - exact match, numeric tolerance, or required phrase, never an LLM judge |
+| Exactly how someone tripped | `harness/taxonomy.py` - looped, unrecovered tool error, invented ID, or confidently wrong |
+| Worked once / worked every time | `pass@1` and `pass^5`, the report's two headline numbers |
+
+</details>
+
+## How it actually works
 
 We built a fake customer-support AI agent — the kind that answers "where's my order" or "can I get a refund." Then we built it three separate times, using three different toolkits for wiring AI agents together (LangGraph, CrewAI, AG2). Same brain (Claude) answering, same fake customer database, same 22 test questions. The only thing that changes between the three versions is which toolkit built them.
 
